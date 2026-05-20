@@ -318,6 +318,62 @@
   .footer-legal { font-size:0.8rem; color:rgba(212,197,178,0.35); }
   .footer-warning { font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.1em; color:rgba(212,197,178,0.25); margin-top:1.5rem; text-transform:uppercase; }
 
+  /* ── LANG SWITCHER ── */
+  .lang-switch {
+    display:flex; align-items:center; gap:0.3rem;
+    margin-left:2rem;
+  }
+  .lang-btn {
+    font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.15em;
+    color:rgba(255,255,255,0.5); background:none; border:none;
+    cursor:pointer; padding:0.2rem 0.4rem;
+    transition:color 0.3s; text-transform:uppercase;
+  }
+  .lang-btn.active { color:#fff; font-weight:600; }
+  .lang-btn:hover { color:var(--gold-light); }
+  .lang-sep { color:rgba(255,255,255,0.25); font-size:0.8rem; }
+
+  /* ── HERO CTA BUTTON ── */
+  .hero-cta-btn {
+    display:inline-flex; align-items:center; gap:0.75rem;
+    font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.35em;
+    color:var(--gold); background:transparent;
+    border:1px solid var(--gold);
+    padding:1.1rem 2.8rem; text-decoration:none; text-transform:uppercase;
+    transition:all 0.35s; margin-top:1.8rem;
+    opacity:0; animation:fadeUp 1.2s 1.5s forwards;
+    text-shadow:0 0 20px rgba(0,0,0,1);
+  }
+  .hero-cta-btn:hover { background:rgba(200,134,10,0.12); color:var(--gold-light); border-color:var(--gold-light); transform:translateY(-3px); }
+  .hero-cta-btn svg { width:18px; height:18px; fill:currentColor; opacity:0.85; }
+
+  /* ── FLOATING WHATSAPP ── */
+  .wa-float {
+    position:fixed; bottom:2rem; right:2rem; z-index:999;
+    width:62px; height:62px; border-radius:50%;
+    background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(37,211,102,0.5), 0 2px 8px rgba(0,0,0,0.3);
+    text-decoration:none;
+    transition:transform 0.3s, box-shadow 0.3s;
+    animation:waPulse 2.5s infinite;
+  }
+  .wa-float:hover { transform:scale(1.1); box-shadow:0 8px 30px rgba(37,211,102,0.7); animation:none; }
+  .wa-float svg { width:32px; height:32px; fill:#fff; }
+  .wa-tooltip {
+    position:absolute; right:74px; top:50%; transform:translateY(-50%);
+    background:rgba(28,14,6,0.92); color:var(--cream);
+    font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.15em;
+    white-space:nowrap; padding:0.5rem 1rem;
+    opacity:0; pointer-events:none; transition:opacity 0.3s;
+    border-left:2px solid #25D366;
+  }
+  .wa-float:hover .wa-tooltip { opacity:1; }
+  @keyframes waPulse {
+    0%,100% { box-shadow:0 4px 20px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.4); }
+    50% { box-shadow:0 4px 20px rgba(37,211,102,0.5), 0 0 0 12px rgba(37,211,102,0); }
+  }
+
   /* ── REVEAL ── */
   .reveal { opacity:0; transform:translateY(32px); transition:opacity 1s ease, transform 1s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
@@ -437,12 +493,17 @@
 <nav id="nav">
   <a class="nav-logo" href="#">NHIS LA'AY</a>
   <ul class="nav-links">
-    <li><a href="#botella">La Botella</a></li>
-    <li><a href="#historia">Historia</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#maguey">Maguey</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#botella" data-es="La Botella" data-en="The Bottle">La Botella</a></li>
+    <li><a href="#historia" data-es="Historia" data-en="Our Story">Historia</a></li>
+    <li><a href="#proceso" data-es="Proceso" data-en="Process">Proceso</a></li>
+    <li><a href="#maguey" data-es="Maguey" data-en="Agave">Maguey</a></li>
+    <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
   </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
 </nav>
 
 <!-- TOP STRIPE -->
@@ -459,13 +520,13 @@
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow">Oaxaca, México &nbsp;·&nbsp; Artesanal &nbsp;·&nbsp; Tradición Ancestral</span>
+    <span class="hero-eyebrow" data-es="Oaxaca, México · Artesanal · Tradición Ancestral" data-en="Oaxaca, Mexico · Handcrafted · Ancestral Tradition">Oaxaca, México &nbsp;·&nbsp; Artesanal &nbsp;·&nbsp; Tradición Ancestral</span>
     <img class="hero-logo" src="maguey-transparent.png" alt="Nhis La'ay">
     <h1 class="hero-brand">Nhis La'ay</h1>
-    <p class="hero-sub">Mezcal Tradicional &nbsp;·&nbsp; 100% Oaxaqueño</p>
+    <p class="hero-sub" data-es="Mezcal Tradicional · 100% Oaxaqueño" data-en="Traditional Mezcal · 100% from Oaxaca">Mezcal Tradicional &nbsp;·&nbsp; 100% Oaxaqueño</p>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
-      <span>Descubrir</span>
+      <span data-es="Descubrir" data-en="Discover">Descubrir</span>
     </div>
   </div>
 </section>
@@ -475,9 +536,9 @@
   <div class="statement-inner">
     <div class="gold-line reveal"></div>
     <p class="reveal">
-      Del corazón de <em>Oaxaca</em> al mundo —<br>
-      un mezcal que lleva en cada sorbo<br>
-      el fuego de la tierra y el alma del maguey.
+      <span data-es="Del corazón de" data-en="From the heart of">Del corazón de</span> <em>Oaxaca</em> <span data-es="al mundo —" data-en="to the world —">al mundo —</span><br>
+      <span data-es="un mezcal que lleva en cada sorbo" data-en="a mezcal that carries in every sip">un mezcal que lleva en cada sorbo</span><br>
+      <span data-es="el fuego de la tierra y el alma del maguey." data-en="the fire of the earth and the soul of the agave.">el fuego de la tierra y el alma del maguey.</span>
     </p>
     <div class="gold-line reveal"></div>
   </div>
@@ -489,15 +550,15 @@
     <img src="botella-sunset.jpg" alt="Nhis La'ay – Botella atardecer en el agave">
   </div>
   <div class="botella-content reveal-right">
-    <span class="section-label">La Botella</span>
-    <h2>Diseñada para<br>perdurar en<br>la memoria</h2>
+    <span class="section-label" data-es="La Botella" data-en="The Bottle">La Botella</span>
+    <h2 data-es="Diseñada para perdurar en la memoria" data-en="Designed to last in memory">Diseñada para<br>perdurar en<br>la memoria</h2>
     <p>Cada detalle de nuestra botella habla del territorio oaxaqueño: el cristal transparente que deja ver el mezcal en su estado más puro, el corcho de madera tallada a mano, y la etiqueta con el maguey multicolor que celebra los textiles zapotecas.</p>
-    <p>Una pieza artesanal que es tan especial por fuera como por dentro.</p>
+    <p><span data-es="Una pieza artesanal que es tan especial por fuera como por dentro." data-en="An artisanal piece as special on the outside as it is on the inside.">Una pieza artesanal que es tan especial por fuera como por dentro.</span></p>
     <div class="botella-specs">
-      <div class="bspec"><h4>Variedad</h4><p>Espadín</p></div>
-      <div class="bspec"><h4>Contenido</h4><p>750 mL</p></div>
-      <div class="bspec"><h4>Origen</h4><p>Oaxaca, México</p></div>
-      <div class="bspec"><h4>Categoría</h4><p>Tradicional</p></div>
+      <div class="bspec"><h4 data-es="Variedad" data-en="Variety">Variedad</h4><p>Espadín</p></div>
+      <div class="bspec"><h4 data-es="Contenido" data-en="Content">Contenido</h4><p>750 mL</p></div>
+      <div class="bspec"><h4 data-es="Origen" data-en="Origin">Origen</h4><p>Oaxaca, México</p></div>
+      <div class="bspec"><h4 data-es="Categoría" data-en="Category">Categoría</h4><p>Tradicional</p></div>
     </div>
   </div>
 </section>
@@ -505,10 +566,10 @@
 <!-- BOTELLA ARTESANAL (invertida) -->
 <section class="botella-split">
   <div class="botella-content reveal-left" style="background:var(--brown-deep);">
-    <span class="section-label">El Espíritu</span>
-    <h2>Elaborado a la<br>manera de siempre</h2>
+    <span class="section-label" data-es="El Espíritu" data-en="The Spirit">El Espíritu</span>
+    <h2 data-es="Elaborado a la manera de siempre" data-en="Made the way it has always been">Elaborado a la<br>manera de siempre</h2>
     <p>Nuestro mezcal nace en una palenquería familiar en los Valles Centrales de Oaxaca, donde los secretos del oficio se transmiten de generación en generación. El proceso es lento, respetuoso y absolutamente artesanal.</p>
-    <p>Sin atajos. Sin aditivos. Solo maguey, fuego, agua y tiempo.</p>
+    <p><span data-es="Sin atajos. Sin aditivos. Solo maguey, fuego, agua y tiempo." data-en="No shortcuts. No additives. Just agave, fire, water, and time.">Sin atajos. Sin aditivos. Solo maguey, fuego, agua y tiempo.</span></p>
   </div>
   <div class="botella-img-wrap reveal-right" style="order:1;">
     <img src="botella-artesanal.jpg" alt="Nhis La'ay – Still life artesanal">
@@ -522,8 +583,8 @@
       <img src="etiqueta-transparent.png" alt="Etiqueta Nhis La'ay">
     </div>
     <div class="historia-text reveal-right">
-      <span class="section-label">Nuestra Historia</span>
-      <h2>Donde el fuego<br>y la tierra se<br>encuentran</h2>
+      <span class="section-label" data-es="Nuestra Historia" data-en="Our Story">Nuestra Historia</span>
+      <h2 data-es="Donde el fuego y la tierra se encuentran" data-en="Where fire and earth meet">Donde el fuego<br>y la tierra se<br>encuentran</h2>
       <p>"Nhis La'ay" lleva en su nombre la esencia misma de Oaxaca: palabras zapotecas que evocan la tierra, el tiempo y el espíritu del maguey. Nacimos de una tradición familiar que se remonta a generaciones de maestros mezcaleros.</p>
       <p>Cada botella es el resultado de un proceso lento y respetuoso, donde el agave espadín maduro es cosechado a mano, cocinado en horno de tierra, molido en tahona y fermentado en tinas de madera bajo el cielo oaxaqueño.</p>
     </div>
@@ -535,31 +596,31 @@
 <!-- PROCESO -->
 <section class="proceso" id="proceso">
   <div class="proceso-header reveal">
-    <span class="section-label">El Proceso</span>
-    <h2>Elaborado con<br>manos y fuego</h2>
+    <span class="section-label" data-es="El Proceso" data-en="The Process">El Proceso</span>
+    <h2 data-es="Elaborado con manos y fuego" data-en="Made with hands and fire">Elaborado con<br>manos y fuego</h2>
   </div>
   <div class="steps">
     <div class="step reveal">
       <span class="step-num">01</span>
-      <h3>Jima del Maguey</h3>
+      <h3 data-es="Jima del Maguey" data-en="Agave Harvest">Jima del Maguey</h3>
       <p>El jimador selecciona a mano cada planta en su punto óptimo de madurez, cortando las pencas para revelar la piña.</p>
       <span class="step-bg-num">01</span>
     </div>
     <div class="step reveal">
       <span class="step-num">02</span>
-      <h3>Horno de Tierra</h3>
+      <h3 data-es="Horno de Tierra" data-en="Earth Oven">Horno de Tierra</h3>
       <p>Las piñas se cuecen 3 a 5 días en un horno cónico con piedras volcánicas y leña de encino, creando el ahumado característico.</p>
       <span class="step-bg-num">02</span>
     </div>
     <div class="step reveal">
       <span class="step-num">03</span>
-      <h3>Tahona de Piedra</h3>
+      <h3 data-es="Tahona de Piedra" data-en="Stone Mill">Tahona de Piedra</h3>
       <p>La piña cocida se muele con tahona de piedra movida por tracción animal, extrayendo el jugo y las fibras del agave.</p>
       <span class="step-bg-num">03</span>
     </div>
     <div class="step reveal">
       <span class="step-num">04</span>
-      <h3>Alambique de Cobre</h3>
+      <h3 data-es="Alambique de Cobre" data-en="Copper Still">Alambique de Cobre</h3>
       <p>Doble destilación artesanal en alambique de cobre, preservando la complejidad aromática única del terruño oaxaqueño.</p>
       <span class="step-bg-num">04</span>
     </div>
@@ -569,23 +630,23 @@
 <!-- MAGUEY STATS -->
 <section class="stats" id="maguey">
   <div class="stats-intro">
-    <span class="section-label reveal">El Maguey</span>
+    <span class="section-label reveal" data-es="El Maguey" data-en="The Agave">El Maguey</span>
     <h2 class="reveal">Agave Angustifolia Haw.<br><em style="font-family:'IM Fell English',serif;font-weight:300;font-size:0.72em;color:var(--cream-dark);">El corazón del mezcal</em></h2>
   </div>
   <div class="stats-grid">
     <div class="stat reveal">
       <div class="stat-num">8<span class="stat-unit">–12</span></div>
-      <span class="stat-label">Años de madurez</span>
+      <span class="stat-label" data-es="Años de madurez" data-en="Years to maturity">Años de madurez</span>
       <p class="stat-desc">El espadín requiere entre 8 y 12 años de crecimiento antes de poder ser cosechado.</p>
     </div>
     <div class="stat reveal">
       <div class="stat-num">100<span class="stat-unit">%</span></div>
-      <span class="stat-label">Agave puro</span>
+      <span class="stat-label" data-es="Agave puro" data-en="Pure agave">Agave puro</span>
       <p class="stat-desc">Sin aditivos, sin colorantes, sin azúcares añadidas. Solo agave, agua, fuego y tiempo.</p>
     </div>
     <div class="stat reveal">
       <div class="stat-num">750<span class="stat-unit">ml</span></div>
-      <span class="stat-label">Por botella</span>
+      <span class="stat-label" data-es="Por botella" data-en="Per bottle">Por botella</span>
       <p class="stat-desc">Destilado en pequeños lotes, preservando la complejidad aromática del agave.</p>
     </div>
   </div>
@@ -596,7 +657,7 @@
   <div class="cita-bg"></div>
   <div class="cita-content">
     <blockquote class="reveal">
-      El mezcal no se bebe,<br>se escucha.<br>Es la voz del maguey<br>y la tierra.
+      <span data-es="El mezcal no se bebe, se escucha. Es la voz del maguey y la tierra." data-en="Mezcal is not drunk, it is listened to. It is the voice of the agave and the earth.">El mezcal no se bebe,<br>se escucha.<br>Es la voz del maguey<br>y la tierra.</span>
     </blockquote>
     <div class="stripe-bar" style="width:120px;margin:2rem auto;border-radius:2px;opacity:0.7;"></div>
     <cite class="reveal">Nhis La'ay &nbsp;·&nbsp; Mezcal Tradicional Oaxaqueño</cite>
@@ -606,9 +667,9 @@
 <!-- CONTACTO -->
 <section class="contacto" id="contacto">
   <div class="contacto-inner">
-    <span class="section-label reveal">Pedidos &amp; Contacto</span>
-    <h2 class="reveal">¿Listo para tu<br>próxima botella?</h2>
-    <p class="contacto-sub reveal">Realizamos pedidos por llamada y WhatsApp directamente desde Oaxaca, México.</p>
+    <span class="section-label reveal" data-es="Pedidos &amp; Contacto" data-en="Orders &amp; Contact">Pedidos &amp; Contacto</span>
+    <h2 class="reveal" data-es="¿Listo para tu próxima botella?" data-en="Ready for your next bottle?">¿Listo para tu<br>próxima botella?</h2>
+    <p class="contacto-sub reveal"><span data-es="Realizamos pedidos por llamada y WhatsApp directamente desde Oaxaca, México." data-en="We take orders by phone and WhatsApp directly from Oaxaca, Mexico.">Realizamos pedidos por llamada y WhatsApp directamente desde Oaxaca, México.</span></p>
     <div class="contacto-cards">
       <a class="contact-card reveal" href="tel:+5219511600360">
         <div class="contact-icon">
@@ -617,7 +678,7 @@
           </svg>
         </div>
         <div class="contact-info">
-          <span class="contact-type">Llamada</span>
+          <span class="contact-type" data-es="Llamada" data-en="Phone Call">Llamada</span>
           <span class="contact-num">+52 1 951 160 0360</span>
         </div>
       </a>
@@ -641,9 +702,15 @@
         </svg>
       </div>
       <div>
-        <span class="ubic-label">Origen &amp; Distribución</span>
+        <span class="ubic-label" data-es="Origen &amp; Distribución" data-en="Origin &amp; Distribution">Origen &amp; Distribución</span>
         <span class="ubic-place">Oaxaca de Juárez, Oaxaca, México</span>
       </div>
+    </div>
+    <div class="contacto-order reveal" style="margin-top:3rem;">
+      <a class="hero-cta-btn" href="https://wa.me/5219511600360?text=Hola%2C%20quiero%20ordenar%20una%20caja%20de%20Nhis%20La%27ay%20Mezcal%20%F0%9F%8C%BF" target="_blank" rel="noopener" style="opacity:1;animation:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-es="Quiero ordenar una caja" data-en="I want to order a case">Quiero ordenar una caja</span>
+      </a>
     </div>
   </div>
 </section>
@@ -653,14 +720,14 @@
   <img class="footer-logo" src="maguey-transparent.png" alt="Logo Nhis La'ay">
   <div class="stripe-bar" style="width:160px;margin:0 auto 2.5rem;border-radius:2px;"></div>
   <div class="footer-brand">NHIS LA'AY</div>
-  <div class="footer-sub">Mezcal Tradicional · Oaxaca, México</div>
+  <div class="footer-sub" data-es="Mezcal Tradicional · Oaxaca, México" data-en="Traditional Mezcal · Oaxaca, Mexico">Mezcal Tradicional · Oaxaca, México</div>
   <div class="footer-contact">
     <a href="tel:+5219511600360">+52 1 951 160 0360</a>
     &nbsp;·&nbsp;
     <a href="https://wa.me/5219511600360" target="_blank">WhatsApp</a>
   </div>
   <p class="footer-legal">© 2026 Nhis La'ay. Todos los derechos reservados.</p>
-  <p class="footer-warning">Beber con moderación · Prohibida la venta a menores de 18 años</p>
+  <p class="footer-warning"><span data-es="Beber con moderación · Prohibida la venta a menores de 18 años" data-en="Drink responsibly · Not for sale to persons under 18">Beber con moderación · Prohibida la venta a menores de 18 años</span></p>
 </footer>
 
 <script>
@@ -681,5 +748,46 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
 </script>
+<script>
+const translations = {
+  es: {
+    "La Botella": "La Botella", "Our Story": "Historia", "The Process": "El Proceso",
+    "Agave": "Maguey", "Contact": "Contacto"
+  },
+  en: {}
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (!text) return;
+    // preserve inner HTML for elements with child tags
+    if (el.children.length === 0) {
+      el.textContent = text;
+    }
+  });
+
+  // h2 elements with data attrs - rebuild with line breaks preserved
+  document.querySelectorAll('h2[data-' + lang + ']').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  document.documentElement.lang = lang;
+  localStorage.setItem('nhis-lang', lang);
+}
+
+// On load, restore saved language
+const saved = localStorage.getItem('nhis-lang');
+if (saved && saved !== 'es') setLang(saved);
+</script>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/5219511600360?text=Hola%2C%20quiero%20ordenar%20una%20caja%20de%20Nhis%20La%27ay%20Mezcal%20%F0%9F%8C%BF" target="_blank" rel="noopener" aria-label="Ordenar por WhatsApp">
+  <span class="wa-tooltip">Quiero ordenar una caja</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 </body>
 </html>
